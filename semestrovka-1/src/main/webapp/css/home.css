@@ -1,0 +1,74 @@
+nav {
+    background-color: #f4f4f4;
+    padding: 10px;
+    text-align: center;
+}
+
+nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #0056b3;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: #ffebf0;
+    color: #b3005b;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.2em;
+    font-style: italic;
+}
+
+.content {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.content h2 {
+    color: #b3005b;
+    border-bottom: 2px solid #ffb3c1;
+    padding-bottom: 5px;
+}
+
+.content p {
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: circle;
+    padding-left: 20px;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+strong {
+    color: #b3005b;
+}
+
+.services, .reasons {
+    margin-bottom: 30px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fffdfd;
+    color: #333;
+}

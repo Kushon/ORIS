@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Вход</title>
+    <link rel = "stylesheet" href="css/login.css">
+
+</head>
+
+<body>
+    <div class="form-container">
+        <h2>Вход</h2>
+        <form name="loginForm" action="/login" method="POST">
+            <input type="email" name="email" placeholder="Электронная почта" required>
+            <input type="password" name="password" placeholder="Пароль" required>
+            <button type="submit">Войти</button>
+        </form>
+        <p>Нет аккаунта? <a href="/register">Зарегистрироваться</a></p>
+    </div>
+
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.forms["loginForm"];
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const email = form["email"].value;
+            const password = form["password"].value;
+
+            if (email === "") {
+                alert("Пожалуйста, введите электронную почту");
+                return;
+            }
+
+            if (password === "") {
+                alert("Пожалуйста, введите пароль");
+                return;
+            }
+
+            const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+            if (!emailRegex.test(email)) {
+                alert("Пожалуйста, введите корректный адрес электронной почты");
+                return;
+            }
+
+            fetch('/login', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+            })
+                .then(async resp => {
+                    console.log(resp.status)
+                    switch (resp.status) {
+                        case 200:
+                            window.location.href = "/home";
+                            break;
+                        case 401:
+                            if (resp.status == 401)
+                                alert("Неверный логин и/или пароль");
+                            break;
+                        case 422:
+                            if (resp.status == 422)
+                                alert(await resp.json());
+                            break;
+                        default:
+                            alert(await resp.text());
+                            break;
+                    }
+                })
+        })
+    });
+</script>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+<link rel="stylesheet" href="css/register.css">
+</head>
+
+<body>
+    <div class="form-container">
+        <h2>Регистрация</h2>
+        <form name="registrationForm" action="/register" method="POST">
+            <input type="text" name="firstName" placeholder="Имя" required>
+            <input type="text" name="lastName" placeholder="Фамилия" required>
+            <input type="email" name="email" placeholder="Электронная почта" required>
+            <input type="password" name="password" placeholder="Пароль" required>
+            <input type="password" name="confirmPassword" placeholder="Подтвердите пароль" required>
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+        <p>Уже есть аккаунт? <a href="/login">Войти</a></p>
+    </div>
+    <script>
+        const form = document.forms["registrationForm"];
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const firstName = document.forms["registrationForm"]["firstName"].value;
+            const lastName = document.forms["registrationForm"]["lastName"].value;
+            const email = document.forms["registrationForm"]["email"].value;
+            const password = document.forms["registrationForm"]["password"].value;
+            const confirmPassword = document.forms["registrationForm"]["confirmPassword"].value;
+
+            if (firstName === "") {
+                alert("Пожалуйста, введите имя");
+                return;
+            }
+            if (lastName === "") {
+                alert("Пожалуйста, введите фамилия");
+                return;
+            }
+
+            if (email === "") {
+                alert("Пожалуйста, введите электронную почту");
+                return;
+            }
+
+            if (password === "") {
+                alert("Пожалуйста, введите пароль");
+                return;
+            }
+            if (confirmPassword === "") {
+                alert("Пожалуйста, подтвердите пароль");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Пароли не совпадают");
+                return;
+            }
+
+            const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+            if (!emailRegex.test(email)) {
+                alert("Пожалуйста, введите корректный адрес электронной почты");
+                return;
+            }
+
+            form.submit();
+        })
+    </script>
+</body>
+
+</html>
